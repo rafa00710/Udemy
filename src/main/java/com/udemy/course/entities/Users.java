@@ -1,14 +1,20 @@
 package com.udemy.course.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 //Seria... para trafegar os dados
 
+@Entity
+@Table(name = "tb_user")
 public class Users implements Serializable {
 
 
   // 1 - Passo //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String email;
