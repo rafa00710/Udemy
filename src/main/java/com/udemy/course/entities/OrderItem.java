@@ -1,5 +1,6 @@
 package com.udemy.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.udemy.course.entities.pk.OrdemItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -10,20 +11,20 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order_item")
-public class OrdemItem implements Serializable {
+public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @EmbeddedId
-    private OrdemItemPK id;
+    private OrdemItemPK id = new OrdemItemPK();
 
     private Integer quantity;
     private Double price;
 
-    public OrdemItem() {
+    public OrderItem() {
 
     }
     //Esses (order e product) tivemos que fazer na mão e tb os getter e setter.
-    public OrdemItem(Order order, Product product, Integer quantity, Double price) {
+    public OrderItem(Order order, Product product, Integer quantity, Double price) {
         id.setOrder(order);
         id.setProduct(product);
 
@@ -47,6 +48,7 @@ public class OrdemItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
@@ -68,8 +70,8 @@ public class OrdemItem implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrdemItem)) return false;
-        OrdemItem ordemItem = (OrdemItem) o;
+        if (!(o instanceof OrderItem)) return false;
+        OrderItem ordemItem = (OrderItem) o;
         return Objects.equals(id, ordemItem.id);
     }
 
