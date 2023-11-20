@@ -1,5 +1,6 @@
 package com.udemy.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,7 +19,9 @@ public class Category implements Serializable {
     private String name;
 
     //Essa anotação diz que esse atributi não sera utilizado no banco de dados
-    @Transient
+    //@Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category(){

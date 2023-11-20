@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
-    private static final  long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +24,19 @@ public class Product implements Serializable {
     //Associações
     //Utiliza o Set pq não pode repetir as categorias e criar uma coleção
     //Essa anotação vai ignorar a criação no banco de dados
-    @Transient
+    // @Transient
+    //Assosiação de tabela muitos para muitos
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
 
-    public Product(){
+    public Product() {
 
     }
+
     //Não inseri coleções no construtor e já esta sendo instaciada
     public Product(long id, String name, String description, double price, String imgUrl) {
         this.id = id;
