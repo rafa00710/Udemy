@@ -1,5 +1,6 @@
 package com.udemy.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -26,6 +27,8 @@ public class Users implements Serializable {
     //Associações em lista: Pq um cliente pode ter varios pedidos
 
     //Um usuario pode ter varios pedidos.
+    //Quando temos uma associação para muitos, devemos utilizar o jsonignore para não estourar a memoria
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
