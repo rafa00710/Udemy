@@ -3,6 +3,8 @@ package com.udemy.course.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 //Seria... para trafegar os dados
@@ -21,7 +23,17 @@ public class Users implements Serializable {
     private String phone;
     private String password;
 
-    //Construtores
+    //Associações em lista: Pq um cliente pode ter varios pedidos
+
+    //Um usuario pode ter varios pedidos.
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
+    //Faço o get dessa lista coleção
+    public List<Order> getOrders() {
+        return orders;
+    }
+//Construtores
 
     public Users(){
 
