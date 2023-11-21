@@ -32,6 +32,10 @@ public class Product implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    //Set para informar para o jpa não aceitar repetição do mesmo item.
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> orderItems = new HashSet<>();
+
 
     public Product() {
 
@@ -89,6 +93,15 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    public  Set<Order> getOrders(){
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x: orderItems) {
+            set.add(x.getOrder());
+            
+        }
+        return set;
     }
 
     @Override
