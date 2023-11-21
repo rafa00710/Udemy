@@ -24,4 +24,11 @@ public class UserService {
       return obj.get();
 
     }
+
+    //Inserir no banco de dados um novo obleto
+
+    public Users insert(Users obj){
+        return userRepository.save(obj);
+
+    }
 }
