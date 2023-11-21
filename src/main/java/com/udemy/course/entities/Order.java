@@ -1,6 +1,7 @@
 package com.udemy.course.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.udemy.course.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
@@ -29,11 +30,12 @@ public class Order implements Serializable {
     //Associações
     //Pode ter muitos pedidos para um unico cliente.
     //Quando temos uma associação para muitos, devemos utilizar o jsonignore para não estourar a memoria
-   // @JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Users client;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
